@@ -22,7 +22,7 @@ jobs:
       - name: Build And Push Docker Image
         uses: mr-smithers-excellent/docker-build-push@v4
         with:
-          image: tostos/mygithubaction
+          image: tostos/mygithubaction:latest
           registry: docker.io
           username: '${{ secrets.DOCKER_USERNAME }}'
           password: '${{ secrets.DOCKER_PASSWORD }}'
