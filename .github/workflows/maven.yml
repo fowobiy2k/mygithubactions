@@ -26,6 +26,11 @@ jobs:
           registry: docker.io
           username: '${{ secrets.DOCKER_USERNAME }}'
           password: '${{ secrets.DOCKER_PASSWORD }}'
+      - name: Debug SSH Keyscan
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -v -T 10 -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
+
       - name: Set up SSH key
         run: |
           mkdir -p ~/.ssh
