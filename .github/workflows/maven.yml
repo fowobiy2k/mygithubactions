@@ -35,23 +35,23 @@ jobs:
         run: |
           mkdir -p ~/.ssh
           echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/id_rsa
-          chmod 400 ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
       - name: SSH and deploy Docker container
         run: |
           ssh -i ~/.ssh/id_rsa ec2-user@${{ secrets.EC2_HOST }} << 'EOF'
             echo "Stopping container..."
-            docker stop springboot-container || true
+            sudo docker stop springboot-container || true
 
             echo "Removing container..."
-            docker rm springboot-container || true
+            sudo docker rm springboot-container || true
 
             echo "Removing image..."
-            docker rmi my-springboot-app || true
+            sudo docker rmi my-springboot-app || true
 
             echo "Pulling new image (optional)..."
-            # docker pull tostos/mygithubaction:latest
+            # sudo docker pull tostos/mygithubaction:latest
 
             echo "Running new container..."
-            docker run -d --name mygithubaction -p 80:8080 tostos/mygithubaction:latest
+            sudo docker run -d --name mygithubaction -p 80:8080 tostos/mygithubaction:latest
           EOF
