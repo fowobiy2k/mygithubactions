@@ -15,7 +15,7 @@ public class GithubactionsDemoApplication {
 
 	@GetMapping
 	public String welcome() {
-		return "You're Welcome";
+		return "You're Welcome to base context";
 	}
 
 }
