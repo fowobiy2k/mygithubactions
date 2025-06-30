@@ -41,13 +41,13 @@ jobs:
         run: |
           ssh -i ~/.ssh/id_rsa ec2-user@${{ secrets.EC2_HOST }} << 'EOF'
             echo "Stopping container..."
-            sudo docker stop springboot-container || true
+            sudo docker stop mygithubaction || true
 
             echo "Removing container..."
-            sudo docker rm springboot-container || true
+            sudo docker rm mygithubaction || true
 
             echo "Removing image..."
-            sudo docker rmi my-springboot-app || true
+            sudo docker rmi tostos/mygithubaction:latest || true
 
             echo "Pulling new image (optional)..."
             # sudo docker pull tostos/mygithubaction:latest
